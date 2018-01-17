@@ -112,7 +112,7 @@ def get_predicted_sentence_2(input_sentence, vocab, rev_vocab, model, sess):
     bucket_id = min([b for b in xrange(len(BUCKETS)) if BUCKETS[b][0] > len(input_token_ids)])
     bucket_data = bucket_one_question(input_token_ids, vocab, bucket_id)
     bucket_data = np.array(bucket_data)
-
+    model.batch_size = 1
 
     # Get a 1-element batch to feed the sentence to the model.
     # encoder_inputs, decoder_inputs, target_weights = model.get_batch(input_feed, bucket_id)

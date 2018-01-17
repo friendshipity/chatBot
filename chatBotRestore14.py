@@ -37,8 +37,8 @@ GO_ID = 1
 EOS_ID = 2
 UNK_ID = 3
 
-train_encode_file = 'train.enc'
-train_decode_file = 'train.dec'
+train_encode_file = 'test2.enc'
+train_decode_file = 'test2.dec'
 cleaned_questions = []  # 对话集合
 cleaned_answers = []  # 对话集合
 with open(train_encode_file, encoding="utf8") as f:
@@ -51,11 +51,11 @@ with open(train_decode_file, encoding="utf8") as f:
 
 vocab, word_to_id, id_to_word = cdu.create_vocab(cleaned_questions, cleaned_answers)
 
-file_object = open('word_to_id4.txt', 'w', encoding="utf8")
+file_object = open('word_to_id21.txt', 'w', encoding="utf8")
 file_object.write(str(word_to_id))
 file_object.close()
 
-file_object = open('id_to_word4.txt', 'w', encoding="utf8")
+file_object = open('id_to_word21.txt', 'w', encoding="utf8")
 file_object.write(str(id_to_word))
 file_object.close()
 

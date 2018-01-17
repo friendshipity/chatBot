@@ -29,19 +29,30 @@ def chat():
         # word_to_id_ = open('word_to_id.txt','r')
         word_to_id = dict()
         id_to_word = dict()
-        with open('word_to_id2.txt', 'r',encoding='utf-8') as f:
-            for line in f:
+
+        f=open('word_to_id21.txt', 'r',encoding='utf-8')
+        a = f.read()
+        word_to_id = eval(a)
 
 
-                try:
-                    id_to_word[int(line.split('\t')[1].strip())] = line.split('\t')[0]
-                except:
-                    print(line)
+        f1=open('id_to_word21.txt', 'r',encoding='utf-8')
+        a1 = f1.read()
+        id_to_word = eval(a1)
 
-                try:
-                    word_to_id[line.split('\t')[0]] = int(line.split('\t')[1].strip())
-                except:
-                    print(line)
+
+        # with open('word_to_id3.txt', 'r',encoding='utf-8') as f:
+        #     for line in f:
+        #
+        #
+        #         try:
+        #             id_to_word[int(line.split('\t')[1].strip())] = line.split('\t')[0]
+        #         except:
+        #             print(line)
+        #
+        #         try:
+        #             word_to_id[line.split('\t')[0]] = int(line.split('\t')[1].strip())
+        #         except:
+        #             print(line)
 
 
 
