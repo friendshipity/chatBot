@@ -137,6 +137,13 @@ def get_predicted_sentence_2(input_sentence, vocab, rev_vocab, model, sess):
         outputs = []
         for i in stc:
             outputs.append(i)
+        rev_vocab[0]=''
+        rev_vocab[1]=''
+        rev_vocab[2]=''
+        rev_vocab[3]=''
         output_sentence = ' '.join([rev_vocab[output] for output in outputs])
         output_sentencess.append(output_sentence)
+
+    # for sentence in output_sentencess:
+
     return output_sentencess

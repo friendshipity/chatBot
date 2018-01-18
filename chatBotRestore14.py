@@ -37,8 +37,8 @@ GO_ID = 1
 EOS_ID = 2
 UNK_ID = 3
 
-train_encode_file = 'test2.enc'
-train_decode_file = 'test2.dec'
+train_encode_file = 'test.enc'
+train_decode_file = 'test.dec'
 cleaned_questions = []  # 对话集合
 cleaned_answers = []  # 对话集合
 with open(train_encode_file, encoding="utf8") as f:
@@ -49,15 +49,29 @@ with open(train_decode_file, encoding="utf8") as f:
     for line in f:
         cleaned_answers.append(line)
 
-vocab, word_to_id, id_to_word = cdu.create_vocab(cleaned_questions, cleaned_answers)
 
-file_object = open('word_to_id21.txt', 'w', encoding="utf8")
-file_object.write(str(word_to_id))
-file_object.close()
 
-file_object = open('id_to_word21.txt', 'w', encoding="utf8")
-file_object.write(str(id_to_word))
-file_object.close()
+model_dir = 'C:/Users/Administrator/PycharmProjects/test/chatBot/checkpoint/'
+ckpt = tf.train.get_checkpoint_state(model_dir)
+if ckpt != None:
+    f = open('word_to_id41.txt', 'r', encoding='utf-8')
+    a = f.read()
+    word_to_id = eval(a)
+
+    f1 = open('id_to_word41.txt', 'r', encoding='utf-8')
+    a1 = f1.read()
+    id_to_word = eval(a1)
+    vocab = list(word_to_id.keys())
+else:
+    vocab, word_to_id, id_to_word = cdu.create_vocab(cleaned_questions, cleaned_answers)
+    file_object = open('word_to_id51.txt', 'w', encoding="utf8")
+    file_object.write(str(word_to_id))
+    file_object.close()
+
+    file_object = open('id_to_word51.txt', 'w', encoding="utf8")
+    file_object.write(str(id_to_word))
+    file_object.close()
+
 
 
 encoded_questions = cdu.encoder(cleaned_questions, word_to_id)
@@ -90,15 +104,13 @@ session.run(tf.global_variables_initializer())
 saver = tf.train.Saver(max_to_keep=10)
 FLAGS = tf.app.flags.FLAGS
 
-model_dir = 'C:/Users/Administrator/PycharmProjects/test/chatBot/checkpoint/'
 
 # 恢复前一次训练
-# ckpt = tf.train.get_checkpoint_state(model_dir)
-# if ckpt != None:
-#     print(ckpt.model_checkpoint_path)
-#     saver.restore(session, ckpt.model_checkpoint_path)
-# else:
-#     session.run(tf.global_variables_initializer())
+if ckpt != None:
+    print(ckpt.model_checkpoint_path)
+    saver.restore(session, ckpt.model_checkpoint_path)
+else:
+    session.run(tf.global_variables_initializer())
 
 for i in range(config.EPOCHS):
     epoch_accuracy = []

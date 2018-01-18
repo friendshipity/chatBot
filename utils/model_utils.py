@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.python.layers.core import Dense
+
 import random
 import chat.data_utils as data_utils
 import numpy as np

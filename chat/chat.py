@@ -27,15 +27,14 @@ def chat():
 
         vocab1, word_to_id1, id_to_word1 = cdu.create_vocab(cleaned_questions, cleaned_answers)
         # word_to_id_ = open('word_to_id.txt','r')
-        word_to_id = dict()
-        id_to_word = dict()
 
-        f=open('word_to_id21.txt', 'r',encoding='utf-8')
+
+        f=open('word_to_id41.txt', 'r',encoding='utf-8')
         a = f.read()
         word_to_id = eval(a)
 
 
-        f1=open('id_to_word21.txt', 'r',encoding='utf-8')
+        f1=open('id_to_word41.txt', 'r',encoding='utf-8')
         a1 = f1.read()
         id_to_word = eval(a1)
 
