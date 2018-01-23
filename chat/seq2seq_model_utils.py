@@ -76,14 +76,13 @@ def get_predicted_sentence_1(input_sentence, vocab, rev_vocab, model, sess):
     bucket_data = bucket_one_question(input_token_ids, vocab, bucket_id)
     bucket_data = np.array(bucket_data)
 
-
     # Get a 1-element batch to feed the sentence to the model.
     # encoder_inputs, decoder_inputs, target_weights = model.get_batch(input_feed, bucket_id)
 
-    feed_dict = {model.inputs: [bucket_data]*config.BATCH_SIZE,
+    feed_dict = {model.inputs: [bucket_data] * config.BATCH_SIZE,
                  model.keep_probs: config.KEEP_PROBS,
-                 model.decoder_seq_len: [BUCKETS[bucket_id][1]]*config.BATCH_SIZE,
-                 model.encoder_seq_len: [BUCKETS[bucket_id][0]]*config.BATCH_SIZE}
+                 model.decoder_seq_len: [BUCKETS[bucket_id][1]] * config.BATCH_SIZE,
+                 model.encoder_seq_len: [BUCKETS[bucket_id][0]] * config.BATCH_SIZE}
 
     # feed_dict = {model.inputs: [bucket_data]*64,
     #              model.keep_probs: config.KEEP_PROBS,
@@ -106,7 +105,6 @@ def get_predicted_sentence_1(input_sentence, vocab, rev_vocab, model, sess):
     return output_sentence
 
 
-
 def get_predicted_sentence_2(input_sentence, vocab, rev_vocab, model, sess):
     input_token_ids = data_utils.sentence_to_token_ids_1(input_sentence, vocab)
     bucket_id = min([b for b in xrange(len(BUCKETS)) if BUCKETS[b][0] > len(input_token_ids)])
@@ -117,12 +115,10 @@ def get_predicted_sentence_2(input_sentence, vocab, rev_vocab, model, sess):
     # Get a 1-element batch to feed the sentence to the model.
     # encoder_inputs, decoder_inputs, target_weights = model.get_batch(input_feed, bucket_id)
 
-    feed_dict = {model.inputs: [bucket_data]*config.BATCH_SIZE,
+    feed_dict = {model.inputs: [bucket_data] * config.BATCH_SIZE,
                  model.keep_probs: config.KEEP_PROBS,
-                 model.decoder_seq_len: [BUCKETS[bucket_id][1]]*config.BATCH_SIZE,
-                 model.encoder_seq_len: [BUCKETS[bucket_id][0]]*config.BATCH_SIZE}
-
-
+                 model.decoder_seq_len: [BUCKETS[bucket_id][1]] * config.BATCH_SIZE,
+                 model.encoder_seq_len: [BUCKETS[bucket_id][0]] * config.BATCH_SIZE}
 
     preds = sess.run([model.predictions], feed_dict=feed_dict)
 
@@ -137,10 +133,10 @@ def get_predicted_sentence_2(input_sentence, vocab, rev_vocab, model, sess):
         outputs = []
         for i in stc:
             outputs.append(i)
-        rev_vocab[0]=''
-        rev_vocab[1]=''
-        rev_vocab[2]=''
-        rev_vocab[3]=''
+        rev_vocab[0] = ''
+        rev_vocab[1] = ''
+        rev_vocab[2] = ''
+        rev_vocab[3] = ''
         output_sentence = ' '.join([rev_vocab[output] for output in outputs])
         output_sentencess.append(output_sentence)
 
